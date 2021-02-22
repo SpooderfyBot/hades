@@ -1,12 +1,13 @@
 import aiohttp
 import router
 import requests
+import utils
 import typing as t
 
 from fastapi import Request, responses
 from pydantic import BaseModel
 
-from server import Hades, render_template
+from server import Hades, render_template, SETTINGS
 from rooms import get_room, set_room, delete_room
 from utils import login_required
 
@@ -149,6 +150,7 @@ class RoomEndpoints(router.Blueprint):
         description="Creates a movie room with a given id",
         methods=["POST"],
     )
+    @utils.enforce_authorization(SETTINGS.bot_auth)
     async def create_room(self, request: Request, info: RoomCreationInfo):
         if request.headers.get("Authorization") != self.app.bot_token:
             return responses.ORJSONResponse(
@@ -195,6 +197,7 @@ class RoomEndpoints(router.Blueprint):
         description="Deletes the room",
         methods=["DELETE"],
     )
+    @utils.enforce_authorization(SETTINGS.bot_auth)
     async def delete_room(self, request: Request, room_id: str):
         if request.headers.get("Authorization") != self.app.bot_token:
             return responses.ORJSONResponse(

@@ -19,4 +19,18 @@ def login_required(func):
     return wrapper
 
 
+def enforce_authorization(value: str):
+    def wrap_dec(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            request: Request = kwargs.get("request")
+            if request.headers.get("authorization") != value:
+                return responses.ORJSONResponse(
+                    {"status": 401, "data": "Un-Authorized request"},
+                    status_code=401
+                )
+
+            return await func(*args, **kwargs)
+        return wrapper
+    return wrap_dec
 
