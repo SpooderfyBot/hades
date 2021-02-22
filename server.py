@@ -59,5 +59,5 @@ class Hades(FastAPI):
 
         self.gateway_url = SETTINGS.gateway_url
 
-        self.sessions = SessionCollection(self.secure_key)
+        self.sessions = SessionCollection()
         self.sessions.mount_middleware(self)

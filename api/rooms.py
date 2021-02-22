@@ -13,7 +13,6 @@ from utils import login_required
 
 
 class RoomCreationInfo(BaseModel):
-    room_id: str
     preferred_stream_id: str = None
     webhook_url: str
     owner_id: int
@@ -152,27 +151,22 @@ class RoomEndpoints(router.Blueprint):
     )
     @utils.enforce_authorization(SETTINGS.bot_auth)
     async def create_room(self, request: Request, info: RoomCreationInfo):
-        if request.headers.get("Authorization") != self.app.bot_token:
-            return responses.ORJSONResponse(
-                {'status': 403, 'data': 'not authorized'},
-                status_code=403
-            )
-
+        room_id = utils.create_room_id()
         server = self.app.live_server.get(sub_domain=info.preferred_stream_id)
         url = f"{server.control}/control/get" \
-              f"?room={info.room_id}" \
+              f"?room={room_id}" \
               f"&authorization={self.app.worker_token}"
         async with self.session.get(url) as resp:
             resp.raise_for_status()
             stream_info = await resp.json()
 
-        url = f"{self.app.gateway_url}/add/{info.room_id}" \
+        url = f"{self.app.gateway_url}/add/{room_id}" \
               f"?live_server={server.control}"
         async with self.session.get(url) as resp:
             resp.raise_for_status()
 
         set_room(
-            info.room_id,
+            room_id,
             server.id,
             info.webhook_url,
             info.owner_id,
@@ -183,7 +177,7 @@ class RoomEndpoints(router.Blueprint):
             {
                 'status': 200,
                 'data': {
-                    'url': f"https://{self.app.spooderfy_domain}/room/{info.room_id}",
+                    'url': f"https://{self.app.spooderfy_domain}/room/{room_id}",
                     'rtmp': server.rtmp,
                     'region': server.id,
                     'stream_key': stream_info['data'],
@@ -199,12 +193,6 @@ class RoomEndpoints(router.Blueprint):
     )
     @utils.enforce_authorization(SETTINGS.bot_auth)
     async def delete_room(self, request: Request, room_id: str):
-        if request.headers.get("Authorization") != self.app.bot_token:
-            return responses.ORJSONResponse(
-                {'status': 403, 'data': 'not authorized'},
-                status_code=403
-            )
-
         room = get_room(room_id)
         if room is None:
             return responses.ORJSONResponse(

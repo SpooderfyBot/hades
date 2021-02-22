@@ -1,6 +1,8 @@
 from fastapi import Request, FastAPI, responses
 from itsdangerous import URLSafeSerializer
 
+from server import SETTINGS
+
 
 class SessionCollection:
     """
@@ -8,8 +10,8 @@ class SessionCollection:
     individual requests and link them back to the request.
     """
 
-    def __init__(self, secret_key: str):
-        self._serializer = URLSafeSerializer(secret_key, "ree")
+    def __init__(self):
+        self._serializer = URLSafeSerializer(SETTINGS.secure_key, "ree")
 
     def mount_middleware(self, app: FastAPI):
         """ Mounts self to a given FastAPI app in the form of middleware """
@@ -28,7 +30,7 @@ class SessionCollection:
         resp.set_cookie(
             "session",
             self._serializer.dumps(request.scope['session']),
-            secure=False,  # todo set to true
+            secure=SETTINGS.secure_sessions,  # todo set to true
         )
 
         return resp

@@ -7,6 +7,7 @@ from pydantic import BaseModel
 class ServerSettings(BaseModel):
     # Changeable
     serve_static: bool = False
+    secure_sessions: bool = False
 
     # Authorization and cookies
     secure_key: str
