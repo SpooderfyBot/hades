@@ -1,0 +1,36 @@
+{% macro loadhead(title) %}
+<head>
+    <meta charset="utf-8">
+    <title>Spooderfy | {{ title }}</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-discord {
+            background: #2C2F33;
+        }
+        .bg-discord-dark {
+            background: #23272A;
+        }
+        .bg-gradient{
+            background: linear-gradient(315deg, #7161ef 0%, #00ffe7 100%);
+        }
+        .text-discord {
+            color: #2C2F33;
+        }
+        .text-discord-dark {
+            color: #23272A;
+        }
+
+        .shadow-sharp {
+            -webkit-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+            box-shadow: 3px 3px 6px 0px rgba(0,0,0,0.75);
+        }
+        .shadow-sharp-inner {
+            box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.75);
+        }
+        .shadow-hard-box-purple {
+            box-shadow: 6px 6px 0px 0px #4F46E5;
+        }
+    </style>
+</head>
+{% endmacro %}

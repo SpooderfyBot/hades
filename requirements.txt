@@ -1,0 +1,14 @@
+orjson
+aiohttp
+aioredis
+uvicorn
+sqlalchemy
+databases
+aiosqlite
+asyncpg
+fastapi
+httptools
+itsdangerous
+jinja2
+aiofiles
+requests

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    {% from "components/meta.html" import loadhead %}
+    {% from "components/nav.html" import navbar %}
+    {% from "components/footer.html" import footer %}
+    {% from "components/top3.html" import render_top_3 %}
+
+    {{ loadhead("Leaderboard About") }}
+
+    <body class="bg-gradient min-h-screen min-w-full min-h-screen">
+        {{ navbar(login) }}
+
+        <div id="bodyMount" class="flex justify-center w-full">
+            <div class="w-4/5">
+                {{ render_top_3(top_3, False, True) }}
+            </div>
+        </div>
+
+        {{ footer() }}
+    </body>
+</html>

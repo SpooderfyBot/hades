@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    {% from "components/meta.html" import loadhead %}
+    {% from "components/nav.html" import navbar %}
+    {% from "components/footer.html" import footer %}
+
+    {{ loadhead("Leaderboard About") }}
+
+    <body class="bg-discord-dark min-w-full xl:overflow-y-hidden">
+        {{ navbar(login) }}
+
+        <div id="bodyMount" class="w-full">
+            <div class="flex flex-col items-center w-full">
+                <div class="flex flex-col items-center w-full">
+                    <div class="py-4">
+                        <h1 class="text-5xl font-bold text-white px-4 pb-2">Season Rewards</h1>
+                        <div class="w-full bg-gradient pt-1 rounded-full"></div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row lg:flex-wrap justify-around items-center w-full lg:w-3/4">
+                        <div class="flex items-center w-11/12 lg:w-1/2 py-8 px-8">
+                            <img class="object-contain w-32 h-32 mr-4" src="/static/images/pngs/nitro.png" alt="">
+                            <div>
+                                <h1 class="text-white text-xl font-bold">
+                                    Discord Nitro
+                                </h1>
+                                <p class="text-gray-300 font-semibold text-lg py-2">
+                                    Experience the power of Discord nitro on us! This reward includes
+                                    a 1 month classic nitro gift, if joined with the server boosts rewards
+                                    this is merged into a 1 month full nitro gift.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center w-11/12 lg:w-1/2 py-8 px-8">
+                            <img class="object-contain w-24 h-24 mr-4" src="/static/images/pngs/boost.png" alt="">
+                            <div>
+                                <h1 class="text-white text-xl font-bold">
+                                    Server Boosts
+                                </h1>
+                                <p class="text-gray-300 font-semibold text-lg py-2">
+                                    Spice up your community with 2x 1 month server boosts
+                                    on us! This is normally merged with a nitro
+                                    reward into a full nitro gift giving you
+                                    2 boosts plus everything that you get from
+                                    nitro.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center w-11/12 lg:w-1/2 py-8 px-8">
+                            <img class="object-contain w-24 h-24 mr-4" src="/static/images/svgs/gold-crown.svg" alt="">
+                            <div>
+                                <h1 class="text-white text-xl font-bold">
+                                    Spooderfy Premium
+                                </h1>
+                                <p class="text-gray-200 font-semibold text-lg py-2">
+                                    Save the best till last! Spooderfy premium gives you
+                                    access to stream upto 4000kbps giving you the power
+                                    to stream 4k in our movie rooms, upto 3 private
+                                    rooms and more.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center w-11/12 lg:w-1/2 py-8 px-8">
+                            <img class="object-contain w-32 h-32 mr-4" src="/static/images/svgs/fame.svg" alt="">
+                            <div>
+                                <h1 class="text-white text-xl font-bold">
+                                    Hall of fame
+                                </h1>
+                                <p class="text-gray-200 font-semibold text-lg py-2">
+                                    Get entered into a global hall of fame marking your achievement
+                                    of this season! This may reap additional rewards later on...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-32">
+                    <a href="/leaderboard/members" class="flex justify-center items-center flex-wrap text-center xl:text-left cursor-pointer text-white font-bold text-2xl focus:outline-none transition duration-200 mx-4">
+                        <img class="inline-block w-16 h-16 object-contain" alt="" src="/static/images/pngs/user.png"/>
+                        Member Leaderboard
+                    </a>
+                    <a href="/leaderboard/servers" class="flex justify-center items-center flex-wrap text-center xl:text-left cursor-pointer text-white font-bold text-2xl focus:outline-none transition duration-200 mx-4">
+                        <img class="inline-block w-16 h-16 object-contain" alt="" src="/static/images/pngs/user-group.png"/>
+                        Server Leaderboard
+                    </a>
+                    <a href="/leaderboard/about" class="flex justify-center items-center flex-wrap text-center xl:text-left cursor-pointer text-white font-bold text-2xl focus:outline-none transition duration-200 mx-4">
+                        <img class="inline-block w-16 h-16 object-contain" alt="" src="/static/images/pngs/question-mark.png"/>
+                        What is this?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

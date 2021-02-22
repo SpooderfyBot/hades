@@ -1,0 +1,38 @@
+{% macro render_rewards_nitro() %}
+    <img class="object-contain w-8 h-8" src="/static/nitro.png" alt="">
+{% endmacro %}
+
+{% macro render_rewards_boosts() %}
+<img class="object-contain w-8 h-8" src="/static/boost.png" alt="">
+{% endmacro %}
+
+{% macro render_rewards_fame() %}
+<img class="object-contain w-6 h-6" src="/static/fame.svg" alt="">
+{% endmacro %}
+
+{% macro render_rewards_premium() %}
+<img class="object-contain w-6 h-6" src="/static/gold-crown.svg" alt="">>
+{% endmacro %}
+
+{% macro render_rewards_all() %}
+<div class="flex justify-center items-center w-2/3">
+    <h1 class="text-white font-semibold mr-4">Rewards:</h1>
+    {{ render_rewards_nitro() }}
+    <h1 class="text-white text-xl font-bold mx-2">+</h1>
+    {{ render_rewards_boosts() }}
+    <h1 class="text-white text-xl font-bold mx-2">+</h1>
+    {{ render_rewards_premium() }}
+    <h1 class="text-white text-xl font-bold mx-2">+</h1>
+    {{ render_rewards_fame() }}
+</div>
+{% endmacro %}
+
+{% macro render_rewards_np() %}
+<div class="flex justify-center items-center w-2/3">
+    <h1 class="text-white font-semibold mr-4">Rewards:</h1>
+    {{ render_rewards_nitro() }}
+    <h1 class="text-white text-xl font-bold mx-2">+</h1>
+    {{ render_rewards_premium() }}
+</div>
+{% endmacro %}
+
