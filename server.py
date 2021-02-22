@@ -1,3 +1,7 @@
+from utils.settings import load_settings
+
+SETTINGS = load_settings("./settings.json")
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
@@ -5,10 +9,6 @@ from jinja2 import Environment, FileSystemLoader
 
 from distribution import LiveServerManager, LiveServer
 from sessions import SessionCollection
-from utils.settings import load_settings
-
-
-SETTINGS = load_settings("./settings.json")
 
 
 templates = Environment(
