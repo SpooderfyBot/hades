@@ -54,7 +54,7 @@ class RoomEndpoints(router.Blueprint):
         if get_room(room_id) is None:
             return responses.HTMLResponse(content=not_found_html, status_code=404)
 
-        request.session['expect_requests'] = True
+        request.session[room_id] = True
 
         html = await render_template('room.html')
         return responses.HTMLResponse(content=html, status_code=200)
@@ -67,7 +67,7 @@ class RoomEndpoints(router.Blueprint):
     )
     @login_required
     async def get_webhook(self, request: Request, room_id: str):
-        if not request.session['expect_requests']:
+        if not request.session[room_id]:
             return responses.ORJSONResponse({
                 "status": 403,
                 "data": "unauthorized"
@@ -94,7 +94,7 @@ class RoomEndpoints(router.Blueprint):
     )
     @login_required
     async def get_info(self, request: Request, room_id: str):
-        if not request.session['expect_requests']:
+        if not request.session[room_id]:
             return responses.ORJSONResponse({
                 "status": 403,
                 "data": "unauthorized"
@@ -216,6 +216,32 @@ class RoomEndpoints(router.Blueprint):
         return responses.ORJSONResponse(
             {'status': 200, 'data': 'room deleted'},
             status_code=200
+        )
+
+    @router.endpoint(
+        "/api/room/{room_id}/emit/bot",
+        endpoint_name="Bot Emit Room",
+        description="Emits a event from the bot to the room",
+        methods=["POST"],
+    )
+    @utils.enforce_authorization(SETTINGS.bot_auth)
+    async def delete_room(self, request: Request, room_id: str):
+        await self.session.post(
+            f"http://spooderfy_gateway:3030/emit/{room_id}",
+            json=(await request.json())
+        )
+
+    @router.endpoint(
+        "/api/room/{room_id}/emit",
+        endpoint_name="Emit Room",
+        description="Emits a event from one user to the room",
+        methods=["POST"],
+    )
+    @login_required
+    async def delete_room(self, request: Request, room_id: str):
+        await self.session.post(
+            f"http://spooderfy_gateway:3030/emit/{room_id}",
+            json=(await request.json())
         )
 
 
